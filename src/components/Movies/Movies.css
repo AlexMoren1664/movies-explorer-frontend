@@ -1,0 +1,15 @@
+.movies_header {
+    background-color: #fff;
+    justify-content: flex-start;
+    padding-bottom: 70px;
+}
+.movies__link-container {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .movies_header {
+        justify-content: space-between;
+    }
+}

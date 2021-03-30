@@ -1,0 +1,122 @@
+.about-project {
+    width: 89%;
+    margin: 0 auto;
+}
+
+.about-project__title {
+    border-bottom: 1px solid #000;
+    padding-bottom: 23px;
+    padding-top: 110px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 27px;
+    margin: 0;
+}
+
+.about-project__container {
+    padding-top: 70px;
+    display: flex;
+    padding-bottom: 110px;
+}
+
+.about-project__stage {
+    padding-right: 40px;
+}
+
+
+.about-project__stage-name {
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 24px;
+    margin: 0;
+    padding-bottom: 26px;
+}
+
+.about-project__text {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0;
+}
+
+.about-project__progress {
+    display: flex;
+    padding-bottom: 110px;
+}
+.about-project__two-column {
+    width: 20%;
+}
+.about-project__two-column-stage {
+    min-height: 36px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F2F2F2;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+}
+.about-project__dev {
+    padding-top: 14px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #A0A0A0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-project__two-column_type_frontend {
+    width: 80%;
+}
+.about-project__two-column-stage_type_backend {
+    background: #2BE080;
+}
+
+
+@media(max-width: 768px) {
+    .about-project__stage {
+        padding-right: 30px;
+    }
+    .about-project__text {
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .about-project__container {
+        padding-bottom: 94px;
+    }
+    .about-project__progress {
+        padding-bottom: 90px
+    }
+}
+
+@media(max-width: 560px) {
+    .about-project__title {
+        padding-top: 70px;
+
+    }
+    .about-project__container {
+        padding-bottom: 4px;
+        flex-direction: column;
+    }
+    .about-project__stage {
+        padding-right: 0;
+        padding-bottom: 56px;
+    }
+    .about-project__progress {
+        display: flex;
+        padding-bottom: 70px;
+    }
+
+    .about-project__two-column-stage {
+        font-size: 11px;
+        line-height: 13px;
+    }
+    .about-project__dev {
+        font-size: 11px;
+        line-height: 13px;
+    }
+}
