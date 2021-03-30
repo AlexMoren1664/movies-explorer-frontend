@@ -37,6 +37,11 @@
     cursor: pointer;
     width: 29px;
 }
+
+.portfolio__icon-link:hover {
+    opacity: 0.7;
+}
+
 .portfolio__link_border_none {
     border-bottom: 0 ;
     padding-bottom: 0;

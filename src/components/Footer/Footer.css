@@ -39,6 +39,10 @@
     color: #000000;
 } 
 
+.footer__link:hover {
+    opacity: 0.7;
+}
+
 @media(max-width: 768px) {
     .footer {
         background-color: #FFFFFF;
@@ -65,8 +69,10 @@
         padding-bottom: 12px;
         font-size: 12px;
         line-height: 15px;
-
     }
+
+
+
     .footer__copyright {
         padding-top: 18px;
         color: #A0A0A0;

@@ -55,21 +55,26 @@
 
 
 .header__movies {
-    font-weight: 500;
+    font-weight: normal;
     font-size: 13px;
     line-height: 18px;
-    text-decoration:none;
+    text-decoration: none;
     color: #000;
-
 }
+
+.header__movies:hover {
+    font-weight: 500;
+    opacity: 0.7;
+}
+
 .header__movies_type_saved {
-    font-weight: normal;
-    padding-left: 16px;
+    margin-left: 16px;
 }
 .header__movies_type_profile {
     background-image: url('../../images/profile.svg');
     width: 100px;
     height: 32px;
+    border-bottom: 0
 }
 
 @media (max-width: 890px) {

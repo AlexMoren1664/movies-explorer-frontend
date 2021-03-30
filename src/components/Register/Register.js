@@ -14,6 +14,7 @@ function Register() {
             type="input"
             className="register__input"
             placeholder="Введите имя"
+            required
           ></input>
         </div>
         <div className="register__container">
@@ -22,6 +23,7 @@ function Register() {
             type="input"
             className="register__input"
             placeholder="Введите Email"
+            required
           ></input>
         </div>
         <div className="register__container">
@@ -30,6 +32,7 @@ function Register() {
             type="password"
             className="register__input register__input_color_pink"
             placeholder="Введите пароль"
+            required
           ></input>
           <span className="register__validation">Что-то пошло не так...</span>
         </div>
