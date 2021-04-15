@@ -41,9 +41,9 @@
     background: url(../../images/buttonsave.svg) no-repeat center;
     width: 100px;
     height: 29px;
-    padding-bottom: 65px;
-    margin: auto;
+    margin: 18px auto;
 }
+
 .card__button_type_favorites {
     background-image: url(../../images/saved.svg);
 }

@@ -9,7 +9,7 @@ function burgerMenu(props) {
       <button
         type="button"
         className="burger-menu__button"
-        onClick={props.onClose}
+        onClick={props.closeBurgerMenu}
       ></button>
       <nav className="burger-menu__navigation">
         <div className="burger-menu__container">

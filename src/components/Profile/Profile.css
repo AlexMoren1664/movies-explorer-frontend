@@ -26,8 +26,7 @@
 }
 
 .profile__input {
-    unicode-bidi: normal; 
-    direction: rtl; 
+    text-align: end;
     font-weight: normal;
     font-size: 11px;
     line-height: 13px;
@@ -35,7 +34,10 @@
     border: none;
     outline: none;
 }
-
+.profile__input:focus {
+    border-bottom: 1px solid #FF6838;;
+}
+ 
 .profile__line {
     min-height: 1px;
     background-color: #E8E8E8;

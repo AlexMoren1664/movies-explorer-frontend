@@ -1,58 +1,77 @@
+import React from "react";
 import "./Profile.css";
 import Header from "../Header/Header";
-import { Link } from "react-router-dom";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
+import { useState } from "react";
 
-function Profile() {
+function Profile(props) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
+  const currentUser = React.useContext(CurrentUserContext);
+
+  function handleChangeName(event) {
+    setName(event.target.value);
+  }
+
+  function handleCangeEmail(event) {
+    setEmail(event.target.value);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    props.onUpdateUser({
+      name,
+      email,
+    });
+  }
+
+  React.useEffect(() => {
+    setName(currentUser.name);
+    setEmail(currentUser.email);
+  }, [currentUser]);
+
   return (
     <section className="profile">
       <Header
+        loggedIn={props.loggedIn}
+        isOpen={props.isOpen}
         movieHeader={"movies_header"}
-        links={
-          <ul className="header__links">
-            <div className="movies__link-container">
-              <Link to="/movies" className="header__movies">
-                Фильмы
-              </Link>
-              <Link
-                to="/saved-movies"
-                className="header__movies  header__movies_type_saved"
-              >
-                Сохранённые фильмы
-              </Link>
-            </div>
-            <Link
-              to="/profile"
-              className="header__movies header__movies_type_profile"
-            ></Link>
-          </ul>
-        }
       />
-      <form className="profile__form">
-        <h2 className="profile__title">Привет, Виталий!</h2>
+      <form className="profile__form" onSubmit={handleSubmit}>
+        <h2 className="profile__title">Привет, {name}!</h2>
         <div className="profile__container">
           <p className="profile__info">Имя</p>
           <input
-            type="input"
+            onChange={handleChangeName}
+            value={name || ""}
+            type="text"
+            name="name"
             className="profile__input"
-            defaultValue="Александр"
           ></input>
         </div>
         <div className="profile__line"></div>
         <div className="profile__container">
           <p className="profile__info">E-mail</p>
           <input
-            type="input"
+            onChange={handleCangeEmail}
+            value={email || ""}
+            type="email"
+            name="email"
             className="profile__input"
-            defaultValue="qwerty@yandex.ru"
           ></input>
         </div>
 
         <button className="profile__button" type="submit">
           Редактировать
         </button>
-        <Link to="/" className="profile__button profile__button_exit">
+        <button
+          type="button"
+          className="profile__button profile__button_exit"
+          onClick={props.signOut}
+        >
           Выйти из аккаунта
-        </Link>
+        </button>
       </form>
     </section>
   );

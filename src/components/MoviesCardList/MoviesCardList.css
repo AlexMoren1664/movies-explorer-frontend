@@ -30,6 +30,10 @@
 .card-list__button:hover {
     opacity: 0.7;
 }
+.card-list__message {
+    padding-left: 15px;
+    color: #f29d61;
+}
 
 
 @media(max-width:850px) {

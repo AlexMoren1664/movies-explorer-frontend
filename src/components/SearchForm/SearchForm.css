@@ -48,12 +48,12 @@
     outline: none;
     width: 36px;
     height: 18px;
-    background: url(../../images/switch.svg) no-repeat left center;
+    background: url(../../images/switchoff.svg) no-repeat left center;
     transition-duration: 400ms;
 }
 
 .search__checkbox:checked {
-    background: url(../../images/switchoff.svg) no-repeat left center;
+    background: url(../../images/switch.svg) no-repeat left center;
     transition-duration: 400ms;
 }
 
