@@ -57,6 +57,7 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
+      setPreloader(true);
       mainApi.setToken(localStorage.getItem("jwt"));
       return Promise.all([
         mainApi.getUserInfo(),
@@ -74,7 +75,10 @@ function App() {
         })
         .catch((err) => {
           console.log(err);
-        });
+        })
+        .finally( ()=> {
+          setPreloader(false);
+        })
     }
   }, [loggedIn]);
 
@@ -159,13 +163,17 @@ function App() {
   }
 
   function handleUpdateUser(data) {
+    setPreloader(true);
     mainApi
       .editUserInfo(data)
       .then((res) => {
         setCurrentUser(res);
-        history.push("/saved-movies");
+        history.push("/movies");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(()=> {
+        setPreloader(false);
+      })
   }
 
   function savedMoviesSearch(data) {
