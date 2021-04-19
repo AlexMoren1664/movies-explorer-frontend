@@ -77,6 +77,7 @@ function MoviesCard({
           </div>
           <a className="card__trailer" href={card.trailer} target="blank">
             <img
+              title={card.description}
               src={card.image !== null ? card.image : ""}
               alt={card.nameEN}
               className="card__img"
@@ -96,6 +97,7 @@ function MoviesCard({
             <p className="card__time">{card.duration + " мин"}</p>
           </div>
           <img
+            title={card.description}
             src={
               card.image !== null
                 ? `https://api.nomoreparties.co${card.image.url}`

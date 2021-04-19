@@ -74,27 +74,24 @@ function App() {
           setMoviesMe(savedMovies);
         })
         .catch((err) => {
-          console.log(err);
+          console.log("Произошла ошибка:", err);
         })
-        .finally( ()=> {
+        .finally(() => {
           setPreloader(false);
-        })
+        });
     }
   }, [loggedIn]);
-
-  const localStorageMovies = JSON.parse(localStorage.getItem("movies"));
-  const localStorageSavedMovies = JSON.parse(
-    localStorage.getItem("savedMovies")
-  );
 
   function addMovies(data) {
     mainApi
       .getNewMovies(data)
       .then((res) => {
         setMoviesMe([res, ...moviesMe]);
+        moviesMe.push(res);
+        localStorage.setItem("savedMovies", JSON.stringify(moviesMe));
       })
       .catch((err) => {
-        console.log(err);
+        console.log("Произошла ошибка:", err);
       });
   }
 
@@ -103,11 +100,12 @@ function App() {
       .register(email, password, name)
       .then((res) => {
         if (res) {
+          alert("Регистрация прошла успешно");
           history.push("/signin");
         }
       })
       .catch((err) => {
-        console.log("Ошибка:", err);
+        console.log("Произошла ошибка:", err);
       });
   }
 
@@ -124,7 +122,7 @@ function App() {
       })
       .catch((err) => {
         alert("Неправильная почта или пароль");
-        console.log("Ошибка:", err);
+        console.log("Произошла ошибка:", err);
       });
   }
 
@@ -140,9 +138,10 @@ function App() {
       .then(() => {
         const newMovies = moviesMe.filter((c) => c._id !== movie._id);
         setMoviesMe(newMovies);
+        localStorage.setItem("savedMovies", JSON.stringify(newMovies));
       })
       .catch((err) => {
-        console.log(err);
+        console.log("Произошла ошибка:", err);
       });
   }
 
@@ -168,15 +167,20 @@ function App() {
       .editUserInfo(data)
       .then((res) => {
         setCurrentUser(res);
+        alert("Данные пользователя обновлены");
         history.push("/movies");
       })
-      .catch((err) => console.log(err))
-      .finally(()=> {
+      .catch((err) => console.log("Произошла ошибка:", err))
+      .finally(() => {
         setPreloader(false);
-      })
+      });
   }
 
   function savedMoviesSearch(data) {
+    localStorage.setItem("savedMovies", JSON.stringify(moviesMe));
+    const localStorageSavedMovies = JSON.parse(
+      localStorage.getItem("savedMovies")
+    );
     const filterMovies = localStorageSavedMovies.filter((val) => {
       return val.nameRU.toLowerCase().includes(data.toLowerCase());
     });
@@ -184,6 +188,7 @@ function App() {
   }
 
   function moviesSearch(data) {
+    const localStorageMovies = JSON.parse(localStorage.getItem("movies"));
     const filterMovies = localStorageMovies.filter((val) => {
       return val.nameRU.toLowerCase().includes(data.toLowerCase());
     });
@@ -201,7 +206,7 @@ function App() {
         setCheckbox(false)
       );
     } else {
-      setMoviesMe(filterMovies)
+      setMoviesMe(filterMovies);
       setCheckbox(true);
     }
   }
@@ -217,7 +222,7 @@ function App() {
         setCheckbox(false)
       );
     } else {
-      setMovies(filterMovies)
+      setMovies(filterMovies);
       setCheckbox(true);
     }
   }

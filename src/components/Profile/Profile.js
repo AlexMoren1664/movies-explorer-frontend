@@ -5,30 +5,34 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 import { useState } from "react";
 
 function Profile(props) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+  });
+  const [errors, setErrors] = useState({});
+  const [isValid, setIsValid] = useState(false);
 
   const currentUser = React.useContext(CurrentUserContext);
 
-  function handleChangeName(event) {
-    setName(event.target.value);
-  }
-
-  function handleCangeEmail(event) {
-    setEmail(event.target.value);
-  }
+  const handleChange = (event) => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+    setValues({ ...values, [name]: value });
+    setErrors({ ...errors, [name]: target.validationMessage });
+    setIsValid(target.closest("form").checkValidity());
+  };
 
   function handleSubmit(event) {
     event.preventDefault();
-    props.onUpdateUser({
-      name,
-      email,
-    });
+    props.onUpdateUser(values);
   }
 
   React.useEffect(() => {
-    setName(currentUser.name);
-    setEmail(currentUser.email);
+    setValues({
+      name: currentUser.name,
+      email: currentUser.email,
+    });
   }, [currentUser]);
 
   return (
@@ -39,30 +43,42 @@ function Profile(props) {
         movieHeader={"movies_header"}
       />
       <form className="profile__form" onSubmit={handleSubmit}>
-        <h2 className="profile__title">Привет, {name}!</h2>
+        <h2 className="profile__title">Привет, {currentUser.name}!</h2>
         <div className="profile__container">
           <p className="profile__info">Имя</p>
           <input
-            onChange={handleChangeName}
-            value={name || ""}
+            required
+            onChange={handleChange}
+            value={values.name || ""}
             type="text"
             name="name"
             className="profile__input"
+            autoComplete="off"
           ></input>
+          <span className="profile__validation">{errors.name}</span>
         </div>
         <div className="profile__line"></div>
         <div className="profile__container">
           <p className="profile__info">E-mail</p>
           <input
-            onChange={handleCangeEmail}
-            value={email || ""}
+            required
+            onChange={handleChange}
+            value={values.email || ""}
             type="email"
             name="email"
             className="profile__input"
+            autoComplete="off"
           ></input>
+          <span className="profile__validation">{errors.email}</span>
         </div>
 
-        <button className="profile__button" type="submit">
+        <button
+          disabled={!isValid}
+          className={`profile__button ${
+            isValid ? "profile__button_disabled" : ""
+          }`}
+          type="submit"
+        >
           Редактировать
         </button>
         <button
