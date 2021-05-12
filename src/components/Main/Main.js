@@ -6,35 +6,11 @@ import Techs from "../Techs/Techs";
 import AboutMe from "../AboutMe/AboutMe";
 import Portfolio from "../Portfolio/Portfolio";
 import Header from "../Header/Header";
-import { Link } from "react-router-dom";
 
-function Main() {
+function Main(props) {
   return (
     <main className="content">
-      <Header
-        links={
-          <>
-            <div className="header__container-links">
-              <Link to="/signup">
-                <button
-                  className="header__button header__button_type_registration"
-                  type="button"
-                >
-                  Регистрация
-                </button>
-              </Link>
-              <Link to="/signin">
-                <button
-                  className="header__button header__button_type_login"
-                  type="button"
-                >
-                  Войти
-                </button>
-              </Link>
-            </div>
-          </>
-        }
-      />
+      <Header loggedIn={props.loggedIn} isOpen={props.isOpen} />
       <Promo />
       <NavTab />
       <AboutProject />

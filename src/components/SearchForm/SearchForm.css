@@ -27,11 +27,12 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 80px;
+    width: 39px;
     height: 34px;
     background: url(../../images/search.svg) no-repeat right center;
     border: none;
     outline: none;
+    cursor: pointer;
 }
 
 .search__button:hover {
@@ -48,12 +49,12 @@
     outline: none;
     width: 36px;
     height: 18px;
-    background: url(../../images/switch.svg) no-repeat left center;
+    background: url(../../images/switchoff.svg) no-repeat left center;
     transition-duration: 400ms;
 }
 
 .search__checkbox:checked {
-    background: url(../../images/switchoff.svg) no-repeat left center;
+    background: url(../../images/switch.svg) no-repeat left center;
     transition-duration: 400ms;
 }
 
