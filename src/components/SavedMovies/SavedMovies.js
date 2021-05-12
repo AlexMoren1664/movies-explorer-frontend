@@ -19,6 +19,7 @@ function SavedMovies(props) {
           checkbox={props.checkbox}
           isSavedMovies={props.isSavedMovies}
           loading={props.loading}
+          disabledCheckbox={props.disabledCheckbox}
         />
         <MoviesCardList
           isSavedMovies={props.isSavedMovies}

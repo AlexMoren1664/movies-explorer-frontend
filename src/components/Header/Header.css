@@ -63,7 +63,7 @@
 }
 
 .header__movies:hover {
-    font-weight: 500;
+    /* font-weight: 500; */
     opacity: 0.7;
 }
 

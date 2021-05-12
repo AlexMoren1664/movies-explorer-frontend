@@ -39,6 +39,7 @@ function Movies(props) {
           searchShormMovies={props.searchShormMovies}
           checkbox={props.checkbox}
           loading={props.loading}
+          disabledCheckbox={props.disabledCheckbox}
         />
 
         <MoviesCardList

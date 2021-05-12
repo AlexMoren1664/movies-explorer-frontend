@@ -9,28 +9,26 @@ function MoviesCard({
   moviesMe,
 }) {
   const [buttonLike, setButtonLike] = useState(false);
-
-  const localStorageSavedMovies = JSON.parse(
-    localStorage.getItem("savedMovies")
-  );
-
-  const savedMovies = localStorageSavedMovies.some(
-    (m) => m.movieId === card.id
-  );
-
-  useEffect(() => {
-    if (savedMovies) {
-      setButtonLike(true);
-    } else {
-      setButtonLike(false);
-    }
-  }, [savedMovies]);
-
   const pathMovieImage = "https://api.nomoreparties.co";
 
   const buttonClassName = `card__button ${
     buttonLike ? "card__button_type_favorites" : ""
   }`;
+
+  useEffect(() => {
+    const localStorageSavedMovies = JSON.parse(
+      localStorage.getItem("savedMovies")
+    );
+    const savedMovies = localStorageSavedMovies.some(
+      (m) => m.movieId === card.id
+    );
+    if (savedMovies) {
+      setButtonLike(true);
+    } else {
+      setButtonLike(false);
+    }
+  }, [card.id]);
+
 
   function handleDeleteClick() {
     onMoviesDelete(card);
@@ -46,12 +44,16 @@ function MoviesCard({
         description: card.description,
         director: card.director,
         duration: card.duration,
-        nameEN: card.nameEN,
+        nameEN: card.nameEN
+          ? card.nameEN
+          : 'No name',
         nameRU: card.nameRU,
         image: card.image
           ? pathMovieImage + card.image.url
           : "https://web.nmsu.edu/~hbw3/_bookdown_files/image-not-found.jpg",
-        trailer: card.trailerLink,
+        trailer: card.trailerLink
+          ? card.trailerLink
+          : "https://youtube.com",
         year: card.year,
         movieId: card.id,
         thumbnail: card.image
@@ -60,10 +62,9 @@ function MoviesCard({
         owner: card.owner,
       });
     } else {
-      setButtonLike(false);
-
       const newMoviesMe = moviesMe.find((m) => m.movieId === card.id);
       onMoviesDelete(newMoviesMe);
+      setButtonLike(false);
     }
   }
 
@@ -72,7 +73,9 @@ function MoviesCard({
       {isSavedMovies ? (
         <>
           <div className="card__info">
-            <h3 className=" card__title">{card.nameRU}</h3>
+            <h3 className=" card__title"
+              title={card.nameRU}
+            >{card.nameRU}</h3>
             <p className="card__time">{card.duration + " мин"}</p>
           </div>
           <a className="card__trailer" href={card.trailer} target="blank">
@@ -93,7 +96,9 @@ function MoviesCard({
       ) : (
         <>
           <div className="card__info">
-            <h3 className=" card__title">{card.nameRU}</h3>
+            <h3 className=" card__title"
+              title={card.nameRU}
+            >{card.nameRU}</h3>
             <p className="card__time">{card.duration + " мин"}</p>
           </div>
           <img
@@ -105,7 +110,8 @@ function MoviesCard({
             }
             alt={card.nameEN}
             className="card__img"
-          ></img>
+          >
+          </img>
           <button
             type="submit"
             className={buttonClassName}

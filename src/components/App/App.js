@@ -27,6 +27,7 @@ function App() {
   let isSavedMovies = true;
   const [preloader, setPreloader] = useState(false);
   const [permissionsChecked, setPermissionsChecked] = useState(false);
+  const [disabledCheckbox, serDisabledCheckbox] = useState(false)
 
   function loading() {
     setPreloader(true);
@@ -44,6 +45,7 @@ function App() {
   }
 
   useEffect(() => {
+    setCheckbox(false)
     const jwt = localStorage.getItem("jwt");
     if (!jwt) {
       setPermissionsChecked(true);
@@ -58,6 +60,7 @@ function App() {
   useEffect(() => {
     if (loggedIn) {
       setPreloader(true);
+      serDisabledCheckbox(true)
       mainApi.setToken(localStorage.getItem("jwt"));
       return Promise.all([
         mainApi.getUserInfo(),
@@ -77,6 +80,7 @@ function App() {
           console.log("Произошла ошибка:", err);
         })
         .finally(() => {
+          serDisabledCheckbox(false)
           setPreloader(false);
         });
     }
@@ -86,6 +90,7 @@ function App() {
     mainApi
       .getNewMovies(data)
       .then((res) => {
+        
         setMoviesMe([res, ...moviesMe]);
         moviesMe.push(res);
         localStorage.setItem("savedMovies", JSON.stringify(moviesMe));
@@ -134,7 +139,7 @@ function App() {
 
   function handleMovieDelete(movie) {
     mainApi
-      .deleteMovies(movie._id)
+      .deleteMovies(movie._id || movie.id)
       .then(() => {
         const newMovies = moviesMe.filter((c) => c._id !== movie._id);
         setMoviesMe(newMovies);
@@ -255,6 +260,7 @@ function App() {
             addMovies={addMovies}
             moviesSearch={moviesSearch}
             checkbox={checkbox}
+            disabledCheckbox={disabledCheckbox}
             searchShormMovies={searchShormMovies}
             loading={loading}
             preloader={preloader}
@@ -267,6 +273,7 @@ function App() {
             isOpen={handleBurgerMenuClick}
             moviesMe={moviesMe}
             checkbox={checkbox}
+            disabledCheckbox={disabledCheckbox}
             savedMoviesSearch={savedMoviesSearch}
             searchShormSavedMovies={searchShormSavedMovies}
             onMoviesDelete={handleMovieDelete}

@@ -9,7 +9,10 @@ function Portfolio() {
         <ul className="portfolio__list">
           <li className="portfolio__link">
             <p className="portfolio__title-link">Статичный сайт</p>
-            <a href="/" className="portfolio__cite">
+            <a href="https://alexmoren1664.github.io/how-to-learn" 
+            className="portfolio__cite"
+            target="blank"
+            >
               <img className="portfolio__icon-link" src={arrow} alt="ссылка" />
             </a>
           </li>

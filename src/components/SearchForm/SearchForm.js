@@ -45,7 +45,9 @@ function SearchForm(props) {
             checked={props.checkbox}
           >
             <label className="search__label">
-              <input type="checkbox" className="search__checkbox"></input>
+              <input type="checkbox" className="search__checkbox"
+              disabled={props.disabledCheckbox}
+              ></input>
               <span className="search__label-title">Короткометражки</span>
             </label>
           </form>
@@ -71,7 +73,9 @@ function SearchForm(props) {
             checked={props.checkbox}
           >
             <label className="search__label">
-              <input type="checkbox" className="search__checkbox"></input>
+              <input type="checkbox" className="search__checkbox"
+              disabled={props.disabledCheckbox}
+              ></input>
               <span className="search__label-title">Короткометражки</span>
             </label>
           </form>
